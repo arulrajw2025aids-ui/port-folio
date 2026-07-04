@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arul Raj W | AI & Data Science Engineer Portfolio</title>
+    
+    <!-- SEO Optimization -->
+    <meta name="description" content="Portfolio of Arul Raj W, an aspiring AI & Data Science Engineer and Full Stack Developer. Specialized in Computer Vision, Machine Learning, and Intelligent Web Applications.">
+    <meta name="keywords" content="Arul Raj W, AI Engineer, Data Science, Full Stack Developer, Computer Vision, YOLO, UAV Disaster Management, Sri Eshwar College of Engineering">
+    <meta name="author" content="Arul Raj W">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Arul Raj W | AI & Data Science Portfolio">
+    <meta property="og:description" content="Building intelligent solutions that solve real-world problems through AI, Computer Vision, and Full-Stack Development.">
+    <meta property="og:image" content="assets/images/uav_disaster.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#020617">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Futuristic Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="glow-logo">AR</div>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadBar"></div>
+            </div>
+            <div class="loading-status" id="loadStatus">INITIALIZING CORE SYSTEM...</div>
+        </div>
+    </div>
+
+    <!-- Interactive Mouse Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- AI Particles Canvas Background -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- Glowing Background Gradients -->
+    <div class="ambient-glow g1"></div>
+    <div class="ambient-glow g2"></div>
+    <div class="ambient-glow g3"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="navLogo">
+                <span class="logo-accent">&lt;</span>AR<span class="logo-accent">/&gt;</span>
+            </a>
+            
+            <nav class="nav-links" id="navMenu">
+                <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About</a>
+                <a href="#education" class="nav-link"><i class="fa-solid fa-graduation-cap"></i> Timeline</a>
+                <a href="#skills" class="nav-link"><i class="fa-solid fa-laptop-code"></i> Skills</a>
+                <a href="#projects" class="nav-link"><i class="fa-solid fa-code-branch"></i> Projects</a>
+                <a href="#profiles" class="nav-link"><i class="fa-solid fa-user-check"></i> Profiles</a>
+                <a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-text-content">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span class="badge-text">Available for Internships & Projects</span>
+                    </div>
+                    <span class="hero-intro">Hello, I'm</span>
+                    <h1 class="hero-name">Arul Raj W</h1>
+                    <h2 class="hero-title">
+                        I am a <span class="typing-text" id="typingText">AI Solutions</span><span class="cursor-blink">|</span>
+                    </h2>
+                    <p class="hero-tagline">
+                        Building intelligent solutions that solve real-world problems through AI, Computer Vision, and Full-Stack Development.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary" id="btnContactMe">
+                            <i class="fa-solid fa-paper-plane"></i> Contact Me
+                        </a>
+                        <a href="#projects" class="btn btn-secondary" id="btnViewProjects">
+                            <i class="fa-solid fa-folder-open"></i> View Projects
+                        </a>
+                        <a href="assets/resume.pdf" class="btn btn-outline" download id="btnDownloadResume">
+                            <i class="fa-solid fa-download"></i> Resume
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/arulrajw2025" target="_blank" rel="noopener" class="social-link" id="heroGithub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/arul-raj-w" target="_blank" rel="noopener" class="social-link" id="heroLinkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="circuit-container">
+                        <div class="circuit-glow-orb"></div>
+                        <div class="circuit-card">
+                            <div class="card-inner">
+                                <div class="scanner-line"></div>
+                                <div class="node-circles">
+                                    <div class="nc-circle nc1"></div>
+                                    <div class="nc-circle nc2"></div>
+                                    <div class="nc-circle nc3"></div>
+                                </div>
+                                <div class="code-editor-header">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                    <span class="editor-title">engine.py</span>
+                                </div>
+                                <div class="code-editor-body">
+                                    <pre><code><span class="keyword">import</span> ultralytics
+<span class="keyword">from</span> models <span class="keyword">import</span> YOLO
+
+model = YOLO(<span class="string">'yolov8n.pt'</span>)
+
+<span class="keyword">def</span> <span class="function">detect_disaster_victims</span>(frame):
+    results = model(frame)
+    <span class="keyword">for</span> r <span class="keyword">in</span> results:
+        <span class="keyword">if</span> r.boxes:
+            alert_rescue_team()
+            <span class="keyword">return</span> r.plot()
+    <span class="keyword">return</span> frame</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#about" aria-label="Scroll Down">
+                    <span class="mouse-icon">
+                        <span class="wheel"></span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="about-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="header-line"></div>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="about-info-card">
+                        <div class="about-card-glow"></div>
+                        <p class="about-text">
+                            I am an Artificial Intelligence & Data Science undergraduate at <strong>Sri Eshwar College of Engineering</strong> with a strong passion for Artificial Intelligence, Computer Vision, Machine Learning, and Full-Stack Web Development.
+                        </p>
+                        <p class="about-text">
+                            I enjoy building intelligent software that solves real-world challenges. My interests include AI-powered applications, UAV technologies, automation, web development, and problem solving.
+                        </p>
+                        <p class="about-text">
+                            I actively participate in hackathons, coding competitions, and continuously improve my technical skills through projects and online learning.
+                        </p>
+                        
+                        <div class="personal-details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-val">Coimbatore, Tamil Nadu, India</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Institution:</span>
+                                <span class="detail-val">Sri Eshwar College of Engineering</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Degree:</span>
+                                <span class="detail-val">B.Tech – AI & Data Science</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Academics:</span>
+                                <span class="detail-val">8.09 CGPA</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-showcase">
+                        <h3 class="side-heading">Focus Areas</h3>
+                        <div class="showcase-cards">
+                            <div class="showcase-card">
+                                <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                                <div class="card-text">
+                                    <h4>AI & UAV Systems</h4>
+                                    <p>Integrating computer vision pipelines with drone hardware for smart automation.</p>
+                                </div>
+                            </div>
+                            <div class="showcase-card">
+                                <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                                <div class="card-text">
+                                    <h4>Full-Stack Apps</h4>
+                                    <p>Crafting robust backends with Flask/SQLite and premium interfaces in HTML/CSS/JS.</p>
+                                </div>
+                            </div>
+                            <div class="showcase-card">
+                                <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                                <div class="card-text">
+                                    <h4>Competitive Coding</h4>
+                                    <p>Over 1,200 problems solved across platforms, cultivating quick problem-solving.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="stats-section section-padding">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-counter">
+                        <div class="counter-number" data-target="3">0</div>
+                        <div class="counter-label">Major Projects Developed</div>
+                    </div>
+                    <div class="stat-counter">
+                        <div class="counter-number" data-target="1200">0</div>
+                        <div class="counter-label">Coding Problems Solved</div>
+                    </div>
+                    <div class="stat-counter">
+                        <div class="counter-number" data-target="7">0</div>
+                        <div class="counter-label">Global Certifications</div>
+                    </div>
+                    <div class="stat-counter">
+                        <div class="counter-number" data-target="3">0</div>
+                        <div class="counter-label">Major Achievements</div>
+                    </div>
+                    <div class="stat-counter wide">
+                        <div class="counter-number" data-target="1">0</div>
+                        <div class="counter-label">International Hackathon Recognition</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Timeline -->
+        <section id="education" class="education-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Education Timeline</h2>
+                    <div class="header-line"></div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- B.Tech -->
+                    <div class="timeline-item left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2025 – 2029</span>
+                            <h3>B.Tech - Artificial Intelligence & Data Science</h3>
+                            <h4 class="institution">Sri Eshwar College of Engineering</h4>
+                            <p class="stats-badge"><i class="fa-solid fa-chart-line"></i> CGPA: 8.09</p>
+                            <p class="timeline-desc">Specializing in machine learning methodologies, computer vision architectures, advanced data structures, algorithms, and cognitive computing applications.</p>
+                        </div>
+                    </div>
+
+                    <!-- HSC -->
+                    <div class="timeline-item right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024 – 2025</span>
+                            <h3>Higher Secondary (HSC)</h3>
+                            <h4 class="institution">Carmel Higher Secondary School</h4>
+                            <p class="stats-badge"><i class="fa-solid fa-square-poll-vertical"></i> Percentage: 90.6%</p>
+                            <p class="timeline-desc">Completed high school studies focusing heavily on Mathematics, Physics, and Computer Science foundations.</p>
+                        </div>
+                    </div>
+
+                    <!-- SSLC -->
+                    <div class="timeline-item left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022 – 2023</span>
+                            <h3>Secondary School Leaving Certificate (SSLC)</h3>
+                            <h4 class="institution">Carmel Higher Secondary School</h4>
+                            <p class="stats-badge"><i class="fa-solid fa-star"></i> Percentage: 91.6%</p>
+                            <p class="timeline-desc">Established primary academic background with distinction in general sciences and mathematics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="header-line"></div>
+                </div>
+                
+                <div class="skills-wrapper">
+                    <!-- Programming -->
+                    <div class="skill-category-card">
+                        <h3><i class="fa-solid fa-code"></i> Languages & Core</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Python</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 90%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>C / C++</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 85%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>JavaScript</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 80%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Data Structures & Algorithms</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI & Computer Vision -->
+                    <div class="skill-category-card">
+                        <h3><i class="fa-solid fa-brain"></i> AI & Machine Learning</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>YOLO (Object Detection)</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 90%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Computer Vision</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 85%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Machine Learning</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 80%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Image Processing (OpenCV)</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Development -->
+                    <div class="skill-category-card">
+                        <h3><i class="fa-solid fa-globe"></i> Web Development</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Flask (Backend)</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 85%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>HTML5 & CSS3</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 90%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>SQLite (Database)</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 80%"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span>Responsive Web Design</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-progress-bar"><div class="progress" style="width: 90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="skill-category-card">
+                        <h3><i class="fa-solid fa-screwdriver-wrench"></i> Developer Tools</h3>
+                        <div class="tools-grid">
+                            <div class="tool-badge"><i class="fa-brands fa-git-alt"></i> Git</div>
+                            <div class="tool-badge"><i class="fa-brands fa-github"></i> GitHub</div>
+                            <div class="tool-badge"><i class="fa-solid fa-terminal"></i> VS Code</div>
+                            <div class="tool-badge"><i class="fa-solid fa-cloud"></i> Google Colab</div>
+                            <div class="tool-badge"><i class="fa-solid fa-palette"></i> Canva</div>
+                            <div class="tool-badge"><i class="fa-regular fa-file-word"></i> MS Word</div>
+                            <div class="tool-badge"><i class="fa-regular fa-file-excel"></i> Excel</div>
+                            <div class="tool-badge"><i class="fa-solid fa-cubes"></i> Code::Blocks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <!-- Project Filters -->
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="ai-ml">AI & Computer Vision</button>
+                    <button class="filter-btn" data-filter="web-dev">Web Development</button>
+                </div>
+
+                <!-- Projects Display Grid -->
+                <div class="projects-grid">
+                    
+                    <!-- UAV Disaster Management (Large/Featured Card) -->
+                    <div class="project-card featured-card" data-category="ai-ml">
+                        <div class="project-image-wrapper">
+                            <img src="assets/images/uav_disaster.png" alt="UAV Disaster Management" class="project-img">
+                            <div class="project-category-badge">Featured - AI / Computer Vision</div>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">UAV Disaster Management System</h3>
+                            <p class="project-desc">
+                                Developed an AI-powered UAV disaster management system capable of detecting humans from aerial images using Ultralytics YOLO. It functions in real-time to facilitate faster response times during flooding, earthquakes, and forest search missions.
+                            </p>
+                            
+                            <h4 class="features-subheading">Core Functional Systems:</h4>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-circle-check"></i> Real-time Human Detection in chaotic aerial frames</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Robust Object & Victim Spotting pipelines</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Integrated disaster rescue coordination map outputs</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Rapid frame rate drone image pre-processing</li>
+                            </ul>
+                            
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>YOLOv8</span>
+                                <span>Flask</span>
+                                <span>SQLite</span>
+                                <span>HTML/CSS/JS</span>
+                            </div>
+                            
+                            <div class="project-buttons">
+                                <a href="https://github.com/arulrajw2025/uav-disaster-management" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fa-brands fa-github"></i> GitHub</a>
+                                <button class="btn btn-sm btn-secondary open-modal-btn" data-project="uav"><i class="fa-solid fa-book-open"></i> Case Study</button>
+                                <a href="#" class="btn btn-sm btn-outline disabled"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo Unavailable</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fix My Hostel -->
+                    <div class="project-card standard-card" data-category="web-dev">
+                        <div class="project-image-wrapper">
+                            <img src="assets/images/fix_my_hostel.png" alt="Fix My Hostel Project" class="project-img">
+                            <div class="project-category-badge">Web Application</div>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">Fix My Hostel</h3>
+                            <p class="project-desc">
+                                A clean, responsive Hostel Complaint Management System. Enables residents to submit issues and track resolution timelines, with integrated admin consoles for work allocation.
+                            </p>
+                            <div class="project-tech">
+                                <span>Flask</span>
+                                <span>SQLite</span>
+                                <span>CSS3</span>
+                                <span>JS ES6</span>
+                            </div>
+                            <div class="project-buttons">
+                                <a href="https://github.com/arulrajw2025/fix-my-hostel" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fa-brands fa-github"></i> GitHub</a>
+                                <a href="#" class="btn btn-sm btn-outline disabled"><i class="fa-solid fa-eye"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Bloom -->
+                    <div class="project-card standard-card" data-category="web-dev">
+                        <div class="project-image-wrapper">
+                            <img src="assets/images/course_bloom.png" alt="Course Bloom Project" class="project-img">
+                            <div class="project-category-badge">Front-End UI</div>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">Course Bloom</h3>
+                            <p class="project-desc">
+                                An intuitive portal designed to index and search learning resources. Built to simplify discovering programming courses using client-side dynamic search indices.
+                            </p>
+                            <div class="project-tech">
+                                <span>HTML5</span>
+                                <span>CSS Grid</span>
+                                <span>JS vanilla</span>
+                            </div>
+                            <div class="project-buttons">
+                                <a href="https://github.com/arulrajw2025/course-bloom" target="_blank" rel="noopener" class="btn btn-sm btn-primary"><i class="fa-brands fa-github"></i> GitHub</a>
+                                <a href="#" class="btn btn-sm btn-outline disabled"><i class="fa-solid fa-eye"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="achievements-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Key Achievements</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="achievements-grid">
+                    <!-- Achievement 1 -->
+                    <div class="achievement-card">
+                        <div class="ach-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="ach-content">
+                            <span class="ach-date">June 2026</span>
+                            <h3>Top 100 Participant</h3>
+                            <h4>Confluence 2.0 International Hackathon</h4>
+                            <p>Ranked in the top 100 international teams for building innovative automated engineering products, evaluated on execution speed, feasibility, and technical complexity.</p>
+                        </div>
+                    </div>
+
+                    <!-- Achievement 2 -->
+                    <div class="achievement-card">
+                        <div class="ach-icon"><i class="fa-solid fa-award"></i></div>
+                        <div class="ach-content">
+                            <span class="ach-date">SECE Competition</span>
+                            <h3>🥈 2nd Place – Decode the Dash</h3>
+                            <h4>Technical Problem Solving Contest</h4>
+                            <p>Won 2nd prize at Sri Eshwar College of Engineering for rapid code debugging, advanced algorithm optimization, and logical aptitude challenges.</p>
+                        </div>
+                    </div>
+
+                    <!-- Achievement 3 -->
+                    <div class="achievement-card">
+                        <div class="ach-icon"><i class="fa-solid fa-medal"></i></div>
+                        <div class="ach-content">
+                            <span class="ach-date">SECE Hackathon</span>
+                            <h3>🥈 2nd Place – Createathon 2025</h3>
+                            <h4>UI/UX Development Sprint</h4>
+                            <p>Developed a complete production-ready responsive layout from wireframes under strict time restrictions, placing second among highly competitive teams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="certifications-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="certs-carousel">
+                    <!-- Cert 1 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>C Programming</h3>
+                        <span class="cert-issuer">IIT Bombay</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                    <!-- Cert 2 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>Python</h3>
+                        <span class="cert-issuer">HackerRank</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                    <!-- Cert 3 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>CSS</h3>
+                        <span class="cert-issuer">HackerRank</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                    <!-- Cert 4 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>JavaScript</h3>
+                        <span class="cert-issuer">HackerRank</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                    <!-- Cert 5 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>C Programming</h3>
+                        <span class="cert-issuer">Infosys Springboard</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                    <!-- Cert 6 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>Programming Courses</h3>
+                        <span class="cert-issuer">Sololearn</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                    <!-- Cert 7 -->
+                    <div class="cert-card">
+                        <div class="cert-stamp"><i class="fa-solid fa-certificate"></i></div>
+                        <h3>Joy of Computing in Python</h3>
+                        <span class="cert-issuer">NPTEL (Elite + Silver)</span>
+                        <div class="cert-glow-border"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Profiles Section -->
+        <section id="profiles" class="profiles-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Coding Profiles</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="profiles-grid">
+                    <!-- LeetCode -->
+                    <a href="https://leetcode.com/u/arulraj_w/" target="_blank" rel="noopener" class="profile-card lc" id="profileLeetcode">
+                        <div class="profile-overlay-glow"></div>
+                        <div class="profile-icon-brand"><i class="fa-solid fa-code-compare"></i></div>
+                        <h3>LeetCode</h3>
+                        <p class="profile-solved">30+ Problems Solved</p>
+                        <div class="badge-tag">DSA Focus</div>
+                    </a>
+
+                    <!-- SkillRack -->
+                    <a href="#" class="profile-card sr disabled" id="profileSkillrack">
+                        <div class="profile-overlay-glow"></div>
+                        <div class="profile-icon-brand"><i class="fa-solid fa-cube"></i></div>
+                        <h3>SkillRack</h3>
+                        <p class="profile-solved">900+ Problems Solved</p>
+                        <p class="profile-extra">200+ Bronze Badges</p>
+                        <div class="badge-tag">Daily Challenge</div>
+                    </a>
+
+                    <!-- CodeChef -->
+                    <a href="https://www.codechef.com/users/arulraj_w" target="_blank" rel="noopener" class="profile-card cc" id="profileCodechef">
+                        <div class="profile-overlay-glow"></div>
+                        <div class="profile-icon-brand"><i class="fa-solid fa-utensils"></i></div>
+                        <h3>CodeChef</h3>
+                        <p class="profile-solved">300+ Problems Solved</p>
+                        <div class="badge-tag">Competitive Algorithmic</div>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/arulrajw2025" target="_blank" rel="noopener" class="profile-card gh" id="profileGithub">
+                        <div class="profile-overlay-glow"></div>
+                        <div class="profile-icon-brand"><i class="fa-brands fa-github"></i></div>
+                        <h3>GitHub</h3>
+                        <p class="profile-solved">Active Committer</p>
+                        <p class="profile-extra" id="repoCount">Loading repositories...</p>
+                        <div class="badge-tag">Open Source</div>
+                    </a>
+                </div>
+
+                <!-- Dynamic GitHub Repository List -->
+                <div class="github-repos-container">
+                    <h3 class="side-heading"><i class="fa-solid fa-code-fork"></i> Latest GitHub Repositories</h3>
+                    <div class="repos-grid" id="reposGrid">
+                        <!-- Filled by JS dynamic API call -->
+                        <div class="repo-loading-card">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Fetching active projects from GitHub...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Services Section -->
+        <section id="services" class="services-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Services & Expertise</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+                        <h3>AI Development</h3>
+                        <p>Building specialized regression, classification, and neural pipelines that map operational data to actionable business insights.</p>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-eye"></i></div>
+                        <h3>Computer Vision</h3>
+                        <p>Specialized object recognition, segmentation models, and live video analysis workflows using frameworks like YOLO, PyTorch, and OpenCV.</p>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-brands fa-python"></i></div>
+                        <h3>Python Development</h3>
+                        <p>Efficient backends, algorithmic scripts, pipeline automation wrappers, and computational engines built around native Python paradigms.</p>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3>Web Development</h3>
+                        <p>Designing modern, glassmorphic full-stack layouts with Flask databases and responsive, fast, standards-compliant user interfaces.</p>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
+                        <h3>Automation</h3>
+                        <p>Developing scripts to streamline tedious routines, fetch external data nodes, scrape information, and sync system endpoints.</p>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3>Machine Learning</h3>
+                        <p>Designing and deploying predictive algorithms and data architectures that scale to handle high-frequency database entries.</p>
+                    </div>
+                </div>
+                
+                <!-- Student Focus Showcase -->
+                <div class="student-experience-box">
+                    <h3>Focus & Core Competencies</h3>
+                    <p>As a student, I build experience through hands-on hackathons, intensive collaborative project cycles, and challenging problem-solving exercises.</p>
+                    <div class="experience-badges">
+                        <span class="exp-badge">Hackathons</span>
+                        <span class="exp-badge">Team Collaboration</span>
+                        <span class="exp-badge">AI Projects</span>
+                        <span class="exp-badge">Web Development Projects</span>
+                        <span class="exp-badge">Problem Solving</span>
+                        <span class="exp-badge">Self Learning</span>
+                        <span class="exp-badge">Leadership</span>
+                        <span class="exp-badge">Project Development</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="contact-grid">
+                    
+                    <!-- Contact Cards / Info -->
+                    <div class="contact-info">
+                        <h3 class="side-heading">Contact Information</h3>
+                        <p class="contact-desc">Feel free to reach out for hackathon collaborations, internship opportunities, code development, or project consultations. I reply promptly.</p>
+                        
+                        <div class="contact-info-list">
+                            <a href="mailto:arulraj.w2025aids@sece.ac.in" class="contact-card-item">
+                                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div class="contact-details-text">
+                                    <span>Email</span>
+                                    <strong>arulraj.w2025aids@sece.ac.in</strong>
+                                </div>
+                            </a>
+                            <a href="tel:+916384742246" class="contact-card-item">
+                                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div class="contact-details-text">
+                                    <span>Phone</span>
+                                    <strong>+91 63847 42246</strong>
+                                </div>
+                            </a>
+                            <div class="contact-card-item">
+                                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="contact-details-text">
+                                    <span>Location</span>
+                                    <strong>Coimbatore, Tamil Nadu, India</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social links grid -->
+                        <div class="contact-socials-grid">
+                            <a href="https://github.com/arulrajw2025" target="_blank" rel="noopener" class="contact-social-btn" id="contactGithub"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://linkedin.com/in/arul-raj-w" target="_blank" rel="noopener" class="contact-social-btn" id="contactLinkedin"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form & Map -->
+                    <div class="contact-action-wrapper">
+                        <!-- Contact Form -->
+                        <div class="contact-form-container">
+                            <form id="contactForm" class="contact-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="formName">Full Name</label>
+                                        <input type="text" id="formName" name="user_name" required placeholder="John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formEmail">Email Address</label>
+                                        <input type="email" id="formEmail" name="user_email" required placeholder="john@example.com">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formSubject">Subject</label>
+                                    <input type="text" id="formSubject" name="subject" required placeholder="Internship Collaboration">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formMessage">Your Message</label>
+                                    <textarea id="formMessage" name="message" rows="5" required placeholder="Hi Arul, let's collaborate..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block" id="formSubmitBtn">
+                                    <i class="fa-solid fa-paper-plane"></i> Send Message
+                                </button>
+                                <div id="formStatus" class="form-status"></div>
+                            </form>
+                        </div>
+                        
+                        <!-- Map View (Leaflet JS dark tile) -->
+                        <div class="map-wrapper">
+                            <div class="map-label"><i class="fa-solid fa-map-location-dot"></i> Workspace Location</div>
+                            <div id="contactMap" class="contact-map"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a href="#" class="footer-logo">
+                    <span class="logo-accent">&lt;</span>AR<span class="logo-accent">/&gt;</span>
+                </a>
+                <p>Developing intelligent applications with clean code paradigms.</p>
+            </div>
+            <div class="footer-right">
+                <p class="copyright">&copy; 2026 All Rights Reserved.</p>
+                <p class="designer">Designed & Developed by <a href="https://github.com/arulrajw2025" target="_blank" rel="noopener">Arul Raj W</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Case Study Modal -->
+    <div id="caseStudyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBodyContent">
+                <!-- Case study contents injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP for Smooth Entry/Scroll triggers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Leaflet JS for Map rendering -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- EmailJS Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Main JavaScript Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
