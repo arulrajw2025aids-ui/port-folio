@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Typing Animation (Rotating Titles)
     // ----------------------------------------------------------------------
     const typingText = document.getElementById("typingText");
-    const titles = [
+    const defaultTitles = [
         "AI Developer",
         "Full Stack Developer",
         "Computer Vision Enthusiast",
@@ -235,7 +235,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let isDeleting = false;
     
     function typeEffect() {
-        const currentTitle = titles[titleIndex];
+        const titles = (window.getPortfolioTitles ? window.getPortfolioTitles() : defaultTitles);
+        const currentTitle = titles[titleIndex % titles.length] || "AI Developer";
         
         if (isDeleting) {
             typingText.textContent = currentTitle.substring(0, charIndex - 1);
@@ -403,7 +404,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 8. Project Filter Logic
     // ----------------------------------------------------------------------
     const filterButtons = document.querySelectorAll(".filter-btn");
-    const projectCards = document.querySelectorAll(".project-card");
     
     filterButtons.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -411,12 +411,13 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.classList.add("active");
             
             const filterValue = btn.getAttribute("data-filter");
+            const projectCards = document.querySelectorAll(".project-card, #projects .bento-card");
             
             projectCards.forEach(card => {
                 const category = card.getAttribute("data-category");
                 
                 if (filterValue === "all" || category === filterValue) {
-                    card.style.display = card.classList.contains("featured-card") ? "grid" : "flex";
+                    card.style.display = "";
                     gsap.fromTo(card, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 });
                 } else {
                     card.style.display = "none";
@@ -432,35 +433,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const statCounters = document.querySelectorAll(".counter-number");
     let hasCounted = false;
     
-    const countObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !hasCounted) {
-                hasCounted = true;
-                statCounters.forEach(counter => {
-                    const target = parseInt(counter.getAttribute("data-target"));
-                    const duration = 2000; // 2 seconds
-                    const increment = target / (duration / 16); // 60 FPS
-                    
-                    let currentValue = 0;
-                    
-                    function updateCount() {
-                        currentValue += increment;
-                        if (currentValue < target) {
-                            counter.textContent = Math.ceil(currentValue) + (target > 100 ? "+" : "+");
-                            if (target === 1) counter.textContent = "1"; // Handle International Recognition specifically
-                            requestAnimationFrame(updateCount);
-                        } else {
-                            counter.textContent = target + (target > 100 ? "+" : "+");
-                            if (target === 1) counter.textContent = "1";
+    if (statsSection && statCounters.length > 0) {
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasCounted) {
+                    hasCounted = true;
+                    statCounters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute("data-target"));
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60 FPS
+                        
+                        let currentValue = 0;
+                        
+                        function updateCount() {
+                            currentValue += increment;
+                            if (currentValue < target) {
+                                counter.textContent = Math.ceil(currentValue) + (target > 100 ? "+" : "+");
+                                if (target === 1) counter.textContent = "1"; // Handle International Recognition specifically
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                counter.textContent = target + (target > 100 ? "+" : "+");
+                                if (target === 1) counter.textContent = "1";
+                            }
                         }
-                    }
-                    updateCount();
-                });
-            }
-        });
-    }, { threshold: 0.2 });
-    
-    countObserver.observe(statsSection);
+                        updateCount();
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        countObserver.observe(statsSection);
+    }
 
     // ----------------------------------------------------------------------
     // 10. GSAP Scroll Reveals & Animations
@@ -481,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // Global ScrollTrigger configs for standard sections
-    const fadeUpElements = document.querySelectorAll(".about-info-card, .showcase-card, .timeline-item, .skill-category-card, .project-card, .achievement-card, .cert-card, .profile-card, .service-card, .contact-card-item, .contact-form-container, .map-wrapper");
+    const fadeUpElements = document.querySelectorAll(".about-info-card, .showcase-card, .timeline-item, .skill-category-card, .project-card, #projects .bento-card, .achievement-card, .cert-card, .profile-card, .service-card, .contact-card-item, .contact-form-container, .map-wrapper");
     
     fadeUpElements.forEach(elem => {
         gsap.fromTo(elem, 

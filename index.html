@@ -34,6 +34,9 @@
     
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Admin & Entity Manager Styles -->
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body oncontextmenu="return false;">
 
@@ -763,15 +766,140 @@
         </div>
     </div>
 
+    <!-- Small Admin Action Button (Right Bottom) -->
+    <div id="adminFabContainer" class="admin-fab-container">
+        <button id="adminFabBtn" class="admin-fab-btn" title="Admin Portal" aria-label="Admin Portal">
+            <i class="fa-solid fa-lock" id="adminFabIcon"></i>
+            <span class="admin-fab-tooltip">Admin Portal</span>
+        </button>
+    </div>
+
+    <!-- Admin Floating Control Toolbar (Visible when logged in) -->
+    <div id="adminToolbar" class="admin-toolbar">
+        <div class="admin-toolbar-badge">
+            <span class="admin-status-dot"></span> Admin Mode
+        </div>
+        <button id="adminEditModeBtn" class="admin-tool-btn" title="Toggle Direct Inline Editing">
+            <i class="fa-solid fa-pen-to-square"></i> <span class="tool-label">Inline Edit: OFF</span>
+        </button>
+        <button id="adminOpenManagerBtn" class="admin-tool-btn" title="Open Entity Manager Dashboard">
+            <i class="fa-solid fa-sliders"></i> <span class="tool-label">Entity Manager</span>
+        </button>
+        <button id="adminSaveInlineBtn" class="admin-tool-btn primary" title="Save All Inline Edits">
+            <i class="fa-solid fa-floppy-disk"></i> <span class="tool-label">Save Changes</span>
+        </button>
+        <button id="adminExportHtmlBtn" class="admin-tool-btn" title="Download Ready-to-Deploy index.html">
+            <i class="fa-solid fa-cloud-arrow-down"></i> <span class="tool-label">Deploy HTML</span>
+        </button>
+        <button id="adminExportBtn" class="admin-tool-btn" title="Export Portfolio Data (JSON)">
+            <i class="fa-solid fa-file-export"></i>
+        </button>
+        <button id="adminImportBtn" class="admin-tool-btn" title="Import Portfolio Data (JSON)">
+            <i class="fa-solid fa-file-import"></i>
+        </button>
+        <input type="file" id="adminImportFileInput" accept=".json" style="display:none;">
+        <button id="adminResetBtn" class="admin-tool-btn danger" title="Reset All to Defaults">
+            <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button id="adminLogoutBtn" class="admin-tool-btn" title="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+    </div>
+
+    <!-- Inline Edit Mode Visual Floating Pill Indicator -->
+    <div id="inlineEditIndicator" class="inline-edit-indicator">
+        <i class="fa-solid fa-pencil" style="color:#00ffd2;"></i>
+        <span>Inline Edit Mode: Click on any text directly to edit. Press "Save Changes" on toolbar when done!</span>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="admin-modal">
+        <div class="admin-modal-backdrop"></div>
+        <div class="admin-modal-card">
+            <button class="admin-modal-close" id="adminLoginCloseBtn" aria-label="Close Login Modal">&times;</button>
+            <div class="admin-modal-header">
+                <div class="admin-icon-glow"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Portfolio Admin Access</h3>
+                <p>Enter security password to edit and update all portfolio entities.</p>
+            </div>
+            <form id="adminLoginForm" class="admin-login-form">
+                <div class="admin-input-group">
+                    <label for="adminPasswordInput"><i class="fa-solid fa-key"></i> Security Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="adminPasswordInput" placeholder="Enter admin password" required autocomplete="current-password">
+                        <button type="button" class="toggle-pwd-btn" id="togglePwdBtn" aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="adminLoginError" class="admin-error-msg"></div>
+                <div class="admin-form-actions">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-unlock-keyhole"></i> Login & Unlock Editor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Comprehensive Entity Manager Modal -->
+    <div id="adminEntityManagerModal" class="admin-modal">
+        <div class="admin-modal-backdrop"></div>
+        <div class="admin-modal-card entity-manager-card">
+            <div class="em-header">
+                <div class="em-title-wrap">
+                    <i class="fa-solid fa-sliders em-icon"></i>
+                    <div>
+                        <h3>Portfolio Entity Manager</h3>
+                        <div class="em-subtitle">Manage, update, and persist all portfolio components</div>
+                    </div>
+                </div>
+                <button class="admin-modal-close" id="emCloseBtn" aria-label="Close Entity Manager">&times;</button>
+            </div>
+            <div class="em-body">
+                <!-- Navigation Tabs Sidebar -->
+                <div class="em-sidebar">
+                    <button type="button" class="em-tab-btn active" data-tab="hero"><i class="fa-solid fa-id-card"></i> Hero & Identity</button>
+                    <button type="button" class="em-tab-btn" data-tab="about"><i class="fa-solid fa-user"></i> About Me</button>
+                    <button type="button" class="em-tab-btn" data-tab="education"><i class="fa-solid fa-graduation-cap"></i> Timeline</button>
+                    <button type="button" class="em-tab-btn" data-tab="skills"><i class="fa-solid fa-laptop-code"></i> Skills Matrix</button>
+                    <button type="button" class="em-tab-btn" data-tab="projects"><i class="fa-solid fa-code-branch"></i> Projects</button>
+                    <button type="button" class="em-tab-btn" data-tab="achievements"><i class="fa-solid fa-trophy"></i> Achievements</button>
+                    <button type="button" class="em-tab-btn" data-tab="profiles"><i class="fa-solid fa-code"></i> Coding Profiles</button>
+                    <button type="button" class="em-tab-btn" data-tab="services"><i class="fa-solid fa-cubes"></i> Services & Badges</button>
+                    <button type="button" class="em-tab-btn" data-tab="contact"><i class="fa-solid fa-envelope"></i> Contact & Footer</button>
+                    <button type="button" class="em-tab-btn" data-tab="database"><i class="fa-solid fa-database"></i> Cloud Database</button>
+                    <button type="button" class="em-tab-btn" data-tab="security"><i class="fa-solid fa-shield-halved"></i> Settings & Security</button>
+                </div>
+                <!-- Content Panes -->
+                <div class="em-content-area">
+                    <div id="emPane-hero" class="em-tab-pane active"></div>
+                    <div id="emPane-about" class="em-tab-pane"></div>
+                    <div id="emPane-education" class="em-tab-pane"></div>
+                    <div id="emPane-skills" class="em-tab-pane"></div>
+                    <div id="emPane-projects" class="em-tab-pane"></div>
+                    <div id="emPane-achievements" class="em-tab-pane"></div>
+                    <div id="emPane-profiles" class="em-tab-pane"></div>
+                    <div id="emPane-services" class="em-tab-pane"></div>
+                    <div id="emPane-contact" class="em-tab-pane"></div>
+                    <div id="emPane-database" class="em-tab-pane"></div>
+                    <div id="emPane-security" class="em-tab-pane"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- GSAP for Smooth Entry/Scroll triggers -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
     
     <!-- EmailJS Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <!-- Main JavaScript Logic -->
     <script src="script.js"></script>
+
+    <!-- Admin & Entity Manager JavaScript -->
+    <script src="admin.js"></script>
 </body>
 </html>

@@ -1,9 +1,11 @@
-const CACHE_NAME = "ar-portfolio-v1";
+const CACHE_NAME = "ar-portfolio-v3";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
+  "./admin.css",
+  "./admin.js",
   "./manifest.json",
   "./assets/images/uav_disaster.png",
   "./assets/images/fix_my_hostel.png",
