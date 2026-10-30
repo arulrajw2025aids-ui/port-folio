@@ -749,9 +749,18 @@
                 </a>
                 <p>Developing intelligent applications with clean code paradigms.</p>
             </div>
-            <div class="footer-right">
-                <p class="copyright">&copy; 2026 All Rights Reserved.</p>
-                <p class="designer">Designed & Developed by <a href="https://github.com/arulrajw2025aids-ui" target="_blank" rel="noopener">Arul Raj W</a></p>
+            <div class="footer-right-wrap">
+                <div class="footer-right">
+                    <p class="copyright">&copy; 2026 All Rights Reserved.</p>
+                    <p class="designer">Designed & Developed by <a href="https://github.com/arulrajw2025aids-ui" target="_blank" rel="noopener">Arul Raj W</a></p>
+                </div>
+                <!-- Stealth Admin Action Button (In footer only, semi-invisible ghost mode) -->
+                <div id="adminFabContainer" class="admin-fab-container">
+                    <button id="adminFabBtn" class="admin-fab-btn" title="Admin Portal" aria-label="Admin Portal">
+                        <i class="fa-solid fa-lock" id="adminFabIcon"></i>
+                        <span class="admin-fab-tooltip">Admin Portal</span>
+                    </button>
+                </div>
             </div>
         </div>
     </footer>
@@ -764,14 +773,6 @@
                 <!-- Case study contents injected dynamically -->
             </div>
         </div>
-    </div>
-
-    <!-- Small Admin Action Button (Right Bottom) -->
-    <div id="adminFabContainer" class="admin-fab-container">
-        <button id="adminFabBtn" class="admin-fab-btn" title="Admin Portal" aria-label="Admin Portal">
-            <i class="fa-solid fa-lock" id="adminFabIcon"></i>
-            <span class="admin-fab-tooltip">Admin Portal</span>
-        </button>
     </div>
 
     <!-- Admin Floating Control Toolbar (Visible when logged in) -->

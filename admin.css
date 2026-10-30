@@ -4,44 +4,49 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Floating Admin Action Button (Bottom Right)
+   1. Admin Action Button (In Footer Only, Stealth Ghost Mode)
    -------------------------------------------------------------------------- */
 .admin-fab-container {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 9999;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .admin-fab-btn {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 240, 255, 0.35);
-    color: var(--accent-primary, #00f0ff);
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.25);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+    opacity: 0.18;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     outline: none;
 }
 
 .admin-fab-btn i {
-    font-size: 1.15rem;
-    transition: transform 0.3s ease;
+    font-size: 1.05rem;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.admin-fab-btn:hover {
-    transform: translateY(-3px) scale(1.08);
+/* Stealth reveal on hover or focus */
+.admin-fab-btn:hover,
+.admin-fab-btn:focus-visible {
+    opacity: 1;
+    background: rgba(15, 23, 42, 0.95);
     border-color: #00ffd2;
     color: #00ffd2;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 255, 210, 0.45);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 210, 0.45);
+    transform: translateY(-2px) scale(1.08);
 }
 
 .admin-fab-btn:active {
@@ -49,9 +54,10 @@
 }
 
 .admin-fab-btn.logged-in {
+    opacity: 0.85;
     border-color: #00ffd2;
     color: #00ffd2;
-    box-shadow: 0 0 15px rgba(0, 255, 210, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 210, 0.35);
 }
 
 .admin-fab-btn.logged-in::after {
@@ -59,8 +65,8 @@
     position: absolute;
     top: 2px;
     right: 2px;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     background: #00ffd2;
     border-radius: 50%;
     border: 2px solid #020617;
@@ -69,15 +75,15 @@
 
 .admin-fab-tooltip {
     position: absolute;
-    right: calc(100% + 12px);
-    top: 50%;
-    transform: translateY(-50%) translateX(10px);
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
     background: rgba(15, 23, 42, 0.95);
     border: 1px solid rgba(0, 240, 255, 0.3);
     color: #fff;
-    padding: 6px 12px;
+    padding: 5px 11px;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
     white-space: nowrap;
     pointer-events: none;
@@ -85,12 +91,13 @@
     visibility: hidden;
     transition: all 0.25s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 100;
 }
 
 .admin-fab-btn:hover .admin-fab-tooltip {
     opacity: 1;
     visibility: visible;
-    transform: translateY(-50%) translateX(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 /* --------------------------------------------------------------------------
