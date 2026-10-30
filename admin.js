@@ -28,7 +28,8 @@
             projectsBtnText: "View Projects",
             resumeBtnText: "Resume",
             github: "https://github.com/arulrajw2025aids-ui",
-            linkedin: "https://www.linkedin.com/in/arul-raj-w-a5101b388"
+            linkedin: "https://www.linkedin.com/in/arul-raj-w-a5101b388",
+            defaultTheme: "cyber-cyan"
         },
         about: {
             title: "About Me",
@@ -297,7 +298,8 @@
             phone: "+91 63847 42246",
             location: "Coimbatore, Tamil Nadu, India",
             github: "https://github.com/arulrajw2025aids-ui",
-            linkedin: "https://www.linkedin.com/in/arul-raj-w-a5101b388"
+            linkedin: "https://www.linkedin.com/in/arul-raj-w-a5101b388",
+            defaultTheme: "cyber-cyan"
         },
         footer: {
             tagline: "Developing intelligent applications with clean code paradigms.",
@@ -632,6 +634,10 @@
 
             const heroLinkedin = document.getElementById("heroLinkedin");
             if (heroLinkedin && h.linkedin) heroLinkedin.href = h.linkedin;
+
+            if (h.defaultTheme && window.setPortfolioTheme && !sessionStorage.getItem("portfolio-theme-session-override")) {
+                window.setPortfolioTheme(h.defaultTheme);
+            }
         }
 
         // --- About Section ---
@@ -1216,6 +1222,22 @@
                         <label>LinkedIn Profile Link</label>
                         <input type="text" class="em-input" id="emHeroLinkedin" value="${escapeHtml(h.linkedin || '')}">
                     </div>
+                    <div class="em-field-group em-form-col-full">
+                        <label><i class="fa-solid fa-palette"></i> Default Portfolio Theme (10 Available)</label>
+                        <select class="em-input" id="emHeroTheme">
+                            <option value="cyber-cyan" ${h.defaultTheme === 'cyber-cyan' || !h.defaultTheme ? 'selected' : ''}>Cyber Cyan (Default Neon)</option>
+                            <option value="matrix-green" ${h.defaultTheme === 'matrix-green' ? 'selected' : ''}>Matrix Green (Hacker Terminal)</option>
+                            <option value="synthwave-pink" ${h.defaultTheme === 'synthwave-pink' ? 'selected' : ''}>Synthwave Pink (Retro Neon)</option>
+                            <option value="dracula-violet" ${h.defaultTheme === 'dracula-violet' ? 'selected' : ''}>Dracula Purple (Royal Vampire)</option>
+                            <option value="tokyo-cobalt" ${h.defaultTheme === 'tokyo-cobalt' ? 'selected' : ''}>Tokyo Cobalt (Electric Blue)</option>
+                            <option value="crimson-red" ${h.defaultTheme === 'crimson-red' ? 'selected' : ''}>Crimson Red (Blood Ruby)</option>
+                            <option value="solar-amber" ${h.defaultTheme === 'solar-amber' ? 'selected' : ''}>Solar Amber (Solar Gold)</option>
+                            <option value="nordic-frost" ${h.defaultTheme === 'nordic-frost' ? 'selected' : ''}>Nordic Frost (Arctic Teal)</option>
+                            <option value="pure-light" ${h.defaultTheme === 'pure-light' ? 'selected' : ''}>Clean Pearl (Minimal Slate Light)</option>
+                            <option value="warm-sand" ${h.defaultTheme === 'warm-sand' ? 'selected' : ''}>Warm Sand (Terracotta Light)</option>
+                        </select>
+                        <span class="admin-hint">The primary theme shown to visitors on your deployed website by default.</span>
+                    </div>
                 </div>
                 <div class="em-footer-save">
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Hero Entities</button>
@@ -1263,6 +1285,13 @@
             portfolioData.hero.resumeBtnText = document.getElementById("emHeroResumeBtnText").value.trim();
             portfolioData.hero.github = document.getElementById("emHeroGithub").value.trim();
             portfolioData.hero.linkedin = document.getElementById("emHeroLinkedin").value.trim();
+            if (document.getElementById("emHeroTheme")) {
+                const selTheme = document.getElementById("emHeroTheme").value;
+                portfolioData.hero.defaultTheme = selTheme;
+                if (window.setPortfolioTheme) {
+                    window.setPortfolioTheme(selTheme);
+                }
+            }
             savePortfolioData(portfolioData);
         };
     }

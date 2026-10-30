@@ -67,35 +67,115 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ----------------------------------------------------------------------
-    // 3. Theme controller (Light/Dark Mode)
+    // 3. Theme Engine (10 Multiple Dynamic Themes)
     // ----------------------------------------------------------------------
+    const PORTFOLIO_THEMES = [
+        { id: "cyber-cyan", name: "Cyber Cyan", primary: "#00f0ff", secondary: "#00ffd2", tag: "Neon", isLight: false },
+        { id: "matrix-green", name: "Matrix Green", primary: "#00ff66", secondary: "#10b981", tag: "Hacker", isLight: false },
+        { id: "synthwave-pink", name: "Synthwave Pink", primary: "#ff007f", secondary: "#a855f7", tag: "Retro", isLight: false },
+        { id: "dracula-violet", name: "Dracula Purple", primary: "#bd93f9", secondary: "#ff79c6", tag: "Dracula", isLight: false },
+        { id: "tokyo-cobalt", name: "Tokyo Cobalt", primary: "#38bdf8", secondary: "#6366f1", tag: "Electric", isLight: false },
+        { id: "crimson-red", name: "Crimson Red", primary: "#ff2a55", secondary: "#fb7185", tag: "Ruby", isLight: false },
+        { id: "solar-amber", name: "Solar Amber", primary: "#f59e0b", secondary: "#fbbf24", tag: "Gold", isLight: false },
+        { id: "nordic-frost", name: "Nordic Frost", primary: "#2dd4bf", secondary: "#67e8f9", tag: "Arctic", isLight: false },
+        { id: "pure-light", name: "Clean Pearl", primary: "#0284c7", secondary: "#0d9488", tag: "Light", isLight: true },
+        { id: "warm-sand", name: "Warm Sand", primary: "#d97706", secondary: "#b45309", tag: "Light", isLight: true }
+    ];
+
+    const themeMenuWrapper = document.getElementById("themeMenuWrapper");
     const themeToggleBtn = document.getElementById("themeToggle");
-    const themeText = themeToggleBtn.querySelector(".theme-text");
-    
-    // Check saved local theme or default system preference
-    const savedTheme = localStorage.getItem("portfolio-theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    let currentTheme = savedTheme || (prefersDark ? "dark" : "light");
-    document.documentElement.setAttribute("data-theme", currentTheme);
-    updateThemeIcon(currentTheme);
-    
-    themeToggleBtn.addEventListener("click", () => {
-        currentTheme = currentTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", currentTheme);
-        localStorage.setItem("portfolio-theme", currentTheme);
-        updateThemeIcon(currentTheme);
-    });
-    
-    function updateThemeIcon(theme) {
-        if (themeText) {
-            if (theme === "dark") {
-                themeText.textContent = "White";
-            } else {
-                themeText.textContent = "Dark";
-            }
+    const themeActiveName = document.getElementById("themeActiveName");
+    const themeActiveDot = document.getElementById("themeActiveDot");
+    const themeOptionsList = document.getElementById("themeOptionsList");
+
+    let savedTheme = localStorage.getItem("portfolio-theme") || "cyber-cyan";
+    if (savedTheme === "dark") savedTheme = "cyber-cyan";
+    if (savedTheme === "light") savedTheme = "pure-light";
+
+    let currentTheme = savedTheme;
+
+    function applyTheme(themeId) {
+        const theme = PORTFOLIO_THEMES.find(t => t.id === themeId) || PORTFOLIO_THEMES[0];
+        currentTheme = theme.id;
+        document.documentElement.setAttribute("data-theme", theme.id);
+        localStorage.setItem("portfolio-theme", theme.id);
+
+        if (themeActiveName) themeActiveName.textContent = theme.name;
+        if (themeActiveDot) {
+            themeActiveDot.style.background = theme.primary;
+            themeActiveDot.style.boxShadow = `0 0 8px ${theme.primary}`;
+        }
+
+        // Highlight active theme in dropdown
+        if (themeOptionsList) {
+            themeOptionsList.querySelectorAll(".theme-option-item").forEach(item => {
+                if (item.getAttribute("data-theme-id") === theme.id) {
+                    item.classList.add("active");
+                } else {
+                    item.classList.remove("active");
+                }
+            });
         }
     }
+
+    function initThemeDropdown() {
+        if (!themeOptionsList) return;
+
+        themeOptionsList.innerHTML = PORTFOLIO_THEMES.map(theme => `
+            <div class="theme-option-item ${theme.id === currentTheme ? 'active' : ''}" data-theme-id="${theme.id}">
+                <div class="theme-option-info">
+                    <div class="theme-swatches">
+                        <span class="theme-swatch primary" style="background: ${theme.primary};"></span>
+                        <span class="theme-swatch secondary" style="background: ${theme.secondary};"></span>
+                    </div>
+                    <span>${theme.name}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="theme-tag">${theme.tag}</span>
+                    <i class="fa-solid fa-check theme-check-icon"></i>
+                </div>
+            </div>
+        `).join("");
+
+        themeOptionsList.querySelectorAll(".theme-option-item").forEach(item => {
+            item.addEventListener("click", () => {
+                const themeId = item.getAttribute("data-theme-id");
+                applyTheme(themeId);
+                if (themeMenuWrapper) themeMenuWrapper.classList.remove("open");
+                if (themeToggleBtn) themeToggleBtn.setAttribute("aria-expanded", "false");
+            });
+        });
+
+        if (themeToggleBtn && themeMenuWrapper) {
+            themeToggleBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                themeMenuWrapper.classList.toggle("open");
+                const isOpen = themeMenuWrapper.classList.contains("open");
+                themeToggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!themeMenuWrapper.contains(e.target)) {
+                    themeMenuWrapper.classList.remove("open");
+                    themeToggleBtn.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            window.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && themeMenuWrapper.classList.contains("open")) {
+                    themeMenuWrapper.classList.remove("open");
+                    themeToggleBtn.setAttribute("aria-expanded", "false");
+                }
+            });
+        }
+    }
+
+    // Initialize dropdown & apply saved theme
+    initThemeDropdown();
+    applyTheme(currentTheme);
+
+    // Expose for external calls
+    window.setPortfolioTheme = applyTheme;
 
     // ----------------------------------------------------------------------
     // 4. Neural Network Particle Background
@@ -142,8 +222,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         draw() {
-            const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-            ctx.fillStyle = isDark ? "rgba(0, 240, 255, 0.6)" : "rgba(2, 132, 199, 0.6)";
+            const accentRgb = getComputedStyle(document.documentElement).getPropertyValue("--accent-primary-rgb").trim() || "0, 240, 255";
+            const currentThemeObj = PORTFOLIO_THEMES.find(t => t.id === currentTheme);
+            const isLight = currentThemeObj ? currentThemeObj.isLight : false;
+            ctx.fillStyle = isLight ? `rgba(${accentRgb}, 0.5)` : `rgba(${accentRgb}, 0.75)`;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.closePath();
@@ -179,8 +261,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     function drawConnections() {
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        const lineColor = isDark ? "rgba(0, 240, 255," : "rgba(2, 132, 199,";
+        const accentRgb = getComputedStyle(document.documentElement).getPropertyValue("--accent-primary-rgb").trim() || "0, 240, 255";
+        const currentThemeObj = PORTFOLIO_THEMES.find(t => t.id === currentTheme);
+        const isLight = currentThemeObj ? currentThemeObj.isLight : false;
+        const lineColor = `rgba(${accentRgb},`;
+        const baseAlpha = isLight ? 0.12 : 0.18;
         
         for (let i = 0; i < particlesArray.length; i++) {
             for (let j = i + 1; j < particlesArray.length; j++) {
@@ -189,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let dist = Math.sqrt(dx * dx + dy * dy);
                 
                 if (dist < connectionDistance) {
-                    let alpha = (1 - (dist / connectionDistance)) * 0.15;
+                    let alpha = (1 - (dist / connectionDistance)) * baseAlpha;
                     ctx.strokeStyle = `${lineColor}${alpha})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();

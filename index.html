@@ -80,9 +80,21 @@
             </nav>
             
             <div class="nav-actions">
-                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
-                    <span class="theme-text">Dark</span>
-                </button>
+                <div class="theme-menu-wrapper" id="themeMenuWrapper">
+                    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme Palette" aria-expanded="false" title="Switch Theme (10 Available)">
+                        <span class="theme-preview-dot" id="themeActiveDot"></span>
+                        <span class="theme-text" id="themeActiveName">Cyber Cyan</span>
+                        <i class="fa-solid fa-chevron-down theme-chevron"></i>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <div class="theme-dropdown-header">
+                            <span><i class="fa-solid fa-palette"></i> Select Theme (10)</span>
+                        </div>
+                        <div class="theme-options-list" id="themeOptionsList">
+                            <!-- 10 themes generated dynamically by script.js -->
+                        </div>
+                    </div>
+                </div>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
